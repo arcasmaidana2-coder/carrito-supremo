@@ -1,31 +1,54 @@
 import csv
+from pathlib import Path
 
-def cargar_precios(ruta_archivo):
-    productos= []
 
-    with open(ruta_archivo, mode='r', encoding='utf-8') as archivo:
+RUTA_PRECIOS = Path(__file__).resolve().parent.parent / "data" / "precios.csv"
+
+
+def cargar_precios(ruta_archivo=RUTA_PRECIOS):
+    productos = []
+
+    with open(ruta_archivo, mode="r", encoding="utf-8") as archivo:
         lector = csv.DictReader(archivo)
 
         for fila in lector:
-            fila['precio'] = float(fila['precio'])
+            fila["precio"] = float(fila["precio"])
             productos.append(fila)
 
     return productos
 
+
+def normalizar_texto(texto):
+    return texto.strip().lower()
+
+
 def buscar_producto(productos, texto_busqueda):
     resultados = []
+    texto = normalizar_texto(texto_busqueda)
+
+    if not texto:
+        return resultados
 
     for producto in productos:
-        nombre_producto = producto['producto'].lower()
-        texto=texto_busqueda.lower()
+        nombre_producto = normalizar_texto(producto["producto"])
 
         if texto in nombre_producto:
             resultados.append(producto)
 
-    return resultados        
+    return resultados
+
 
 def ordenar_por_precio(productos):
     return sorted(productos, key=lambda producto: producto["precio"])
+
+
+def formatear_producto(producto):
+    return (
+        f'{producto["producto"]} | '
+        f'{producto["tienda"]} | '
+        f'{producto["precio"]} € | '
+        f'confianza: {producto["confianza"]}'
+    )
 
 
 def mostrar_resultados(productos):
@@ -34,17 +57,11 @@ def mostrar_resultados(productos):
         return
 
     for producto in productos:
-        print(
-            f'{producto["producto"]} | '
-            f'{producto["tienda"]} | '
-            f'{producto["precio"]} € | '
-            f'confianza: {producto["confianza"]}'
-        )
+        print(formatear_producto(producto))
 
 
-def main():
-    ruta = "data/precios.csv"
-    productos = cargar_precios(ruta)
+def ejecutar_busqueda():
+    productos = cargar_precios()
 
     busqueda = input("¿Qué producto quieres buscar? ")
 
@@ -55,4 +72,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    ejecutar_busqueda()
