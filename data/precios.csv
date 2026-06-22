@@ -1,0 +1,11 @@
+producto,tienda,precio,unidad,fecha,confianza
+arroz redondo 1kg,Mercadona,1.35,kg,2026-06-22,alta
+arroz redondo 1kg,Lidl,1.29,kg,2026-06-22,alta
+arroz redondo 1kg,DIA,1.42,kg,2026-06-22,media
+leche semidesnatada 1L,Mercadona,0.91,l,2026-06-22,alta
+leche semidesnatada 1L,Lidl,0.89,l,2026-06-22,alta
+garbanzos cocidos 400g,Mercadona,0.82,unidad,2026-06-22,alta
+garbanzos cocidos 400g,DIA,0.79,unidad,2026-06-22,media
+pan sin gluten,Mercadona,2.35,unidad,2026-06-22,media
+pan sin gluten,Carrefour,2.19,unidad,2026-06-22,media
+tofu natural,Lidl,1.59,unidad,2026-06-22,alta
